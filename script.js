@@ -23,13 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 newProject.image = event.target.result; // Convertir l'image en Base64
                 projects.push(newProject);
                 localStorage.setItem("projects", JSON.stringify(projects)); // Sauvegarde
-                window.location.href = "https://mimilkt.github.io/recape.html"; // Redirection vers la page de récap
+                window.location.href = "recap.html"; // Redirection vers la page de récap
             };
             reader.readAsDataURL(imageFile);
         } else {
             projects.push(newProject);
             localStorage.setItem("projects", JSON.stringify(projects));
-            window.location.href = "https://mimilkt.github.io/recape.html";
+            window.location.href = "recap.html";
         }
     });
 });
