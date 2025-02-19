@@ -1,24 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const starContainer = document.body;
-    const numberOfStars = 50;
+    const form = document.getElementById("projectForm");
 
-    for (let i = 0; i < numberOfStars; i++) {
-        let star = document.createElement("div");
-        star.classList.add("star");
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Empêcher le rechargement de la page
 
-        // Positionnement aléatoire
-        star.style.left = `${Math.random() * 100}vw`;
-        star.style.top = `${Math.random() * 100}vh`;
+        // Récupération des valeurs du formulaire
+        const title = document.getElementById("title").value.trim();
+        const description = document.getElementById("description").value.trim();
+        const partners = document.getElementById("partners").value.trim();
+        const capital = document.getElementById("capital").value.trim();
+        const imageInput = document.getElementById("imageInput");
+        const imageFile = imageInput.files[0];
 
-        // Taille aléatoire
-        let size = Math.random() * 3 + 1;
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
+        let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
-        // Animation aléatoire
-        star.style.animationDuration = `${Math.random() * 2 + 1}s`;
-        star.style.animationDelay = `${Math.random()}s`;
+        let newProject = { title, description, partners, capital };
 
-        starContainer.appendChild(star);
-    }
+        // Vérification et ajout de l'image
+        if (imageFile) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                newProject.image = event.target.result; // Convertir l'image en Base64
+                projects.push(newProject);
+                localStorage.setItem("projects", JSON.stringify(projects)); // Sauvegarde
+                window.location.href = "recap.html"; // Redirection vers la page de récap
+            };
+            reader.readAsDataURL(imageFile);
+        } else {
+            projects.push(newProject);
+            localStorage.setItem("projects", JSON.stringify(projects));
+            window.location.href = "recap.html";
+        }
+    });
 });
