@@ -1,35 +1,34 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("projectForm");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starfire Creator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<header>
+    <h1>STARFIRE CREATOR</h1>
+</header>
 
-    form.addEventListener("submit", function(event) {
-        event.preventDefault(); // Empêcher le rechargement de la page
-
-        // Récupération des valeurs du formulaire
-        const title = document.getElementById("title").value.trim();
-        const description = document.getElementById("description").value.trim();
-        const partners = document.getElementById("partners").value.trim();
-        const capital = document.getElementById("capital").value.trim();
-        const imageInput = document.getElementById("imageInput");
-        const imageFile = imageInput.files[0];
-
-        let projects = JSON.parse(localStorage.getItem("projects")) || [];
-
-        let newProject = { title, description, partners, capital };
-
-        // Vérification et ajout de l'image
-        if (imageFile) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                newProject.image = event.target.result; // Convertir l'image en Base64
-                projects.push(newProject);
-                localStorage.setItem("projects", JSON.stringify(projects)); // Sauvegarde
-                window.location.href = "recap.html"; // Redirection vers la page de récap
-            };
-            reader.readAsDataURL(imageFile);
-        } else {
-            projects.push(newProject);
-            localStorage.setItem("projects", JSON.stringify(projects));
-            window.location.href = "recap.html";
-        }
-    });
-});
+<body>
+    <div class="stars-background"></div>
+    <h2>Describe your project : </h2>
+    <form id="projectForm">
+        <input type="text" id="title" placeholder="Project title" required>
+        <textarea id="description" placeholder="Project description" required></textarea>
+        <input type="number" id="partners" placeholder="Team wanted" required>
+        <input type="number" id="capital" placeholder="Invest capital (€) " required>
+        
+        <input type="email" id="contact" placeholder="Contact (email or social link)" required>
+        <!-- Nouveau champ pour importer une image -->
+        <input type="file" id="imageInput" accept="image/*">
+        
+        <button type="submit">Submit project</button>
+    </form>
+       
+<footer> 
+    <p>© 2025 Starfire Creator - Starfire Project - Made with love.</p>
+</footer>   
+    <script src="script.js"></script>    
+</body>
+</html>
