@@ -125,6 +125,31 @@ button:hover {
     border-radius: 8px;
     margin-top: 10px;
 }
+
+.like-btn, .comment-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    background-color: darkslateblue;
+    color: white;
+    border-radius: 5px;
+}
+
+.like-btn:hover, .comment-btn:hover {
+    background-color: darkseagreen;
+}
+
+.comments-section {
+    margin-top: 10px;
+}
+
+.comments-list p {
+    background: #eee;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
 /* Pied de page */
 footer {
     margin-top: 20px;
